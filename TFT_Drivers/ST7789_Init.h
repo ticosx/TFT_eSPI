@@ -6,6 +6,76 @@
 // See ST7735_Setup.h file for an alternative format
 
 {
+#if 1
+delay(120);                //delay 120ms
+writecommand(0x11);     
+delay(120);                //delay 120ms
+writecommand(0x36);     
+writedata( 0x00);   
+writecommand(0x3A);     
+writedata( 0x55);
+writecommand(0xB0);
+writedata(0x00);
+writedata(0xE8);
+writecommand(0xB2);     
+writedata( 0x0C);   
+writedata( 0x0C);   
+writedata( 0x00);   
+writedata( 0x33);   
+writedata( 0x33);   
+writecommand(0xB7);     
+writedata( 0x75);   
+writecommand(0xBB);     
+writedata( 0x13);   
+writecommand(0xC0);     
+writedata( 0x2C);   
+writecommand(0xC2);     
+writedata( 0x01);   
+writecommand(0xC3);     
+writedata( 0x13);    
+writecommand(0xC4);     
+writedata( 0x20);   
+writecommand(0xC6);     
+writedata( 0x0F);   
+writecommand(0xD0);     
+writedata( 0xA4);   
+writedata( 0xA1);   
+writecommand(0xD6);     
+writedata( 0xA1);
+writecommand(0x21);     
+writecommand(0xE0);
+writedata( 0xD0);
+writedata( 0x08);
+writedata( 0x10);
+writedata( 0x0D);
+writedata( 0x0C);
+writedata( 0x07);
+writedata( 0x37);
+writedata( 0x53);
+writedata( 0x4C);
+writedata( 0x39);
+writedata( 0x15);
+writedata( 0x15);
+writedata( 0x2A);
+writedata( 0x2D);
+writecommand(0xE1);
+writedata( 0xD0);
+writedata( 0x0D);
+writedata( 0x12);
+writedata( 0x08);
+writedata( 0x08);
+writedata( 0x15);
+writedata( 0x34);
+writedata( 0x34);
+writedata( 0x4A);
+writedata( 0x36);
+writedata( 0x12);
+writedata( 0x13);
+writedata( 0x2B);
+writedata( 0x2F);   
+writecommand(0x29);  
+
+#else
   writecommand(ST7789_SLPOUT);   // Sleep out
   delay(120);
 
@@ -119,7 +189,7 @@
 
   writecommand(ST7789_DISPON);    //Display on
   delay(120);
-
+#endif
 #ifdef TFT_BL
   // Turn on the back-light LED
   digitalWrite(TFT_BL, HIGH);

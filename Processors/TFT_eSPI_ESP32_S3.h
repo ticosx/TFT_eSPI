@@ -236,7 +236,7 @@ SPI3_HOST = 2
         #define CS_L GPIO.out_w1ts = (1 << TFT_CS); GPIO.out_w1tc = (1 << TFT_CS)
         #define CS_H GPIO.out_w1tc = (1 << TFT_CS); GPIO.out_w1ts = (1 << TFT_CS)
       #else
-        #define CS_L GPIO.out_w1tc = (1 << TFT_CS); GPIO.out_w1tc = (1 << TFT_CS)
+        #define CS_L GPIO.out_w1tc = (1 << TFT_CS); usleep(10)//GPIO.out_w1tc = (1 << TFT_CS)
         #define CS_H GPIO.out_w1ts = (1 << TFT_CS)//;GPIO.out_w1ts = (1 << TFT_CS)
       #endif
     #else

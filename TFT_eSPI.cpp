@@ -447,7 +447,7 @@ TFT_eSPI::TFT_eSPI(int16_t w, int16_t h)
   // Reset the viewport to the whole screen
   resetViewport();
 
-  rotation  = 0;
+  rotation  = 1;
   cursor_y  = cursor_x  = last_cursor_x = bg_cursor_x = 0;
   textfont  = 1;
   textsize  = 1;
@@ -536,8 +536,10 @@ TFT_eSPI::TFT_eSPI(int16_t w, int16_t h)
 void TFT_eSPI::initBus(void) {
 
 #ifdef TFT_CS
+#if TFT_CS != -1
   pinMode(TFT_CS, OUTPUT);
   digitalWrite(TFT_CS, HIGH); // Chip select high (inactive)
+#endif
 #endif
 
 // Configure chip select for touchscreen controller if present
@@ -553,8 +555,10 @@ void TFT_eSPI::initBus(void) {
 #endif
 
 #ifdef TFT_DC
+
   pinMode(TFT_DC, OUTPUT);
   digitalWrite(TFT_DC, HIGH); // Data/Command high = data mode
+
 #endif
 
 #ifdef TFT_RST
@@ -631,7 +635,6 @@ void TFT_eSPI::init(uint8_t tc)
     //spi.pins(        6,          7,           8,          0);
     spi.pins(6, 7, 8, 0);
   #endif
-
   spi.begin(); // This will set HMISO to input
 
 #else
@@ -650,7 +653,7 @@ void TFT_eSPI::init(uint8_t tc)
     INIT_TFT_DATA_BUS;
 
 
-#if defined (TFT_CS) && !defined(RP2040_PIO_INTERFACE)
+#if defined (TFT_CS) && TFT_CS != -1 && !defined(RP2040_PIO_INTERFACE)
   // Set to output once again in case MISO is used for CS
   pinMode(TFT_CS, OUTPUT);
   digitalWrite(TFT_CS, HIGH); // Chip select high (inactive)
