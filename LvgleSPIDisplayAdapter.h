@@ -13,11 +13,12 @@
 
 class LvgleSPIDisplayAdapter : public LvglDisplayAdapter {
   public:
-    LvgleSPIDisplayAdapter(int16_t screenWidth, int16_t screenHeight, int8_t bpp);
+    LvgleSPIDisplayAdapter(int16_t screenWidth, int16_t screenHeight, int8_t bpp, int8_t rotation=1);
     virtual ~LvgleSPIDisplayAdapter() override;
     using LvglDisplayAdapter::getScreenWidth;
     using LvglDisplayAdapter::getScreenHeight;
     using LvglDisplayAdapter::getColorBit;
+    using DisplayAdapter::getRotation;
     //通过以下函数对宏的替换，实现对 TFT_eSPI 中对应 pin 的配置
     static void configSpiPort(int8_t spi_cs, int8_t spi_sclk, int8_t spi_miso, int8_t spi_mosi, int8_t tft_dc, int8_t tft_rst);
     static int8_t getSpiCs(){return spi_cs;}

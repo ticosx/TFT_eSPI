@@ -8,11 +8,12 @@ int8_t LvgleSPIDisplayAdapter::tft_dc = -1;
 int8_t LvgleSPIDisplayAdapter::tft_rst = -1;
 TFT_eSPI* LvgleSPIDisplayAdapter::tft = NULL;
 
-LvgleSPIDisplayAdapter::LvgleSPIDisplayAdapter(int16_t screenWidth, int16_t screenHeight, int8_t bpp)
-  :LvglDisplayAdapter(screenWidth, screenHeight, bpp)
+LvgleSPIDisplayAdapter::LvgleSPIDisplayAdapter(int16_t screenWidth, int16_t screenHeight, int8_t bpp, int8_t rotation)
+  :LvglDisplayAdapter(screenWidth, screenHeight, bpp, rotation)
 {
   if(!tft){
     tft = new TFT_eSPI(screenWidth, screenHeight); /* TFT instance */
+    tft->rotation = rotation;
     tft->begin();
   }
   disp_cb = LvgleSPIDisplayAdapter::display;
