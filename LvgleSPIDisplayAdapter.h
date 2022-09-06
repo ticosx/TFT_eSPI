@@ -19,6 +19,7 @@ class LvgleSPIDisplayAdapter : public LvglDisplayAdapter {
     using LvglDisplayAdapter::getScreenHeight;
     using LvglDisplayAdapter::getColorBit;
     using DisplayAdapter::getRotation;
+    void setSwapBytes(bool);
     //通过以下函数对宏的替换，实现对 TFT_eSPI 中对应 pin 的配置
     static void configSpiPort(int8_t spi_cs, int8_t spi_sclk, int8_t spi_miso, int8_t spi_mosi, int8_t tft_dc, int8_t tft_rst);
     static int8_t getSpiCs(){return spi_cs;}
@@ -37,6 +38,7 @@ class LvgleSPIDisplayAdapter : public LvglDisplayAdapter {
     static int8_t tft_dc;
     static int8_t tft_rst;
     static void display( lv_disp_drv_t *, const lv_area_t *, lv_color_t * );
+    static bool swapBytes;
 };
 
 #endif // LvgleSPIDisplayAdapter_h

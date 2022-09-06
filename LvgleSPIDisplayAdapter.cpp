@@ -7,6 +7,7 @@ int8_t LvgleSPIDisplayAdapter::spi_mosi = -1;
 int8_t LvgleSPIDisplayAdapter::tft_dc = -1;
 int8_t LvgleSPIDisplayAdapter::tft_rst = -1;
 TFT_eSPI* LvgleSPIDisplayAdapter::tft = NULL;
+bool LvgleSPIDisplayAdapter::swapBytes = false;
 
 LvgleSPIDisplayAdapter::LvgleSPIDisplayAdapter(int16_t screenWidth, int16_t screenHeight, int8_t bpp, int8_t rotation)
   :LvglDisplayAdapter(screenWidth, screenHeight, bpp, rotation)
@@ -36,7 +37,7 @@ void LvgleSPIDisplayAdapter::display(lv_disp_drv_t *disp, const lv_area_t *area,
     
     tft->startWrite();
     tft->setAddrWindow( area->x1, area->y1, w, h );
-    tft->pushColors( ( uint16_t * )&color_p->full, w * h, true );
+    tft->pushColors( ( uint16_t * )&color_p->full, w * h, swapBytes );
     tft->endWrite();
 
     lv_disp_flush_ready( disp );
@@ -78,4 +79,8 @@ int8_t getTftDc() {
 
 int8_t getTftRst() {
   return LvgleSPIDisplayAdapter::getTftRst();
+}
+
+void LvgleSPIDisplayAdapter::setSwapBytes(bool swap){
+  swapBytes = swap;
 }
